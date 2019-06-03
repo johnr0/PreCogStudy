@@ -1,0 +1,22 @@
+body {
+  padding: 10px;
+  font-family: sans-serif;
+}
+
+.taskHeader {
+  text-align: center;
+}
+
+.taskVideo {
+  margin: auto;
+  display: block;
+}
+
+.taskButtons{
+  margin: auto;
+  display: block;
+}
+
+.hidden{
+  display: none;
+}
