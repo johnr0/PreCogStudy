@@ -21,11 +21,11 @@ class TaskWrapper extends Component{
             
             if(correct_answer=='yes'){
                 if(correct_answer==answer){
-                    confirm_message = "Correct! Because the vehicle could have move into your lane, it could have harm your vehicle."
+                    confirm_message = "Correct! Because the human could have move into your lane, the human could have caused a catastrophic accident."
                 }else if(answer=='no'){
-                    confirm_message = "You didn't get it correct. Because the vehicle could have move into your lane, it could have harm your vehicle. Please keep the goal in your mind!"
+                    confirm_message = "You didn't get it correct. Because the human could have move into your lane, the human could have caused a catastrophic accident. Please keep the goal in your mind!"
                 }else if(answer=='late'){
-                    confirm_message = "You should have answered early! Also, because the vehicle could have move into your lane, it could have harm your vehicle. Please keep the goal in your mind!"
+                    confirm_message = "You should have answered early! Also, because the human could have move into your lane, it could have caused a catastrophic accident. Please keep the goal in your mind!"
                 }
             }else if(correct_answer=='no'){
                 if(correct_answer==answer){

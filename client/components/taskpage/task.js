@@ -72,7 +72,7 @@ class Task extends Component{
             <div>
                 <h4 className="taskHeader">Complete the task ASAP!</h4>
                 <Player videoUrl={this.props.videoUrl} lateTask={this.lateTask.bind(this)} ref="player"></Player>
-                <h5 className="taskHeader">Can an object in a red box cause an accident to our vehicle?</h5>
+                <h5 className="taskHeader">Can an object in a green box cause an accident to our vehicle?</h5>
                 <div style={{"display":"grid"}}>
                     <div className="taskButtons">
                     <span className="btn">Press ← for Yes</span>
