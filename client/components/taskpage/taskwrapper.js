@@ -29,9 +29,9 @@ class TaskWrapper extends Component{
                 }
             }else if(correct_answer=='no'){
                 if(correct_answer==answer){
-                    confirm_message = "You didn't get it correct. Because the streetlight cannot move into your lane, it cannot harm your vehicle. Please keep the goal in your mind!"
-                }else if(answer=='yes'){
                     confirm_message = "Correct! Because the streetlight cannot move into your lane, it cannot harm your vehicle."
+                }else if(answer=='yes'){
+                    confirm_message = "You didn't get it correct. Because the streetlight cannot move into your lane, it cannot harm your vehicle. Please keep the goal in your mind!"
                 }else if(answer=='late'){
                     confirm_message = "You should have answered early! Also, because the streetlight cannot move into your lane, it cannot harm your vehicle. Please keep the goal in your mind!"
                 }
