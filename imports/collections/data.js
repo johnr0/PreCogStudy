@@ -20,7 +20,7 @@ Meteor.methods({
         Videos.remove(vid)
     },
 
-    'annotation.startTask': function(wid, aid, hid, videoid,){
+    'annotation.startTask': function(wid, aid, hid, videoid,sendTo){
 
         var anno = Annotations.findOne({wid:wid, aid:aid, hid:hid, videoid:videoid})
         if(!anno){
@@ -33,6 +33,7 @@ Meteor.methods({
                 starttime:new Date(),
                 pageduration: -1,
                 videoduration: -1,
+                code: sendTo,
                 prediction: "Not yet done",
             })
         }

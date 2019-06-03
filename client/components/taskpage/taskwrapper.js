@@ -68,7 +68,9 @@ class TaskWrapper extends Component{
                     <Task taskDone={this.taskDone.bind(this)} 
                     videoUrl={this.props.avideo[0].url}
                     wid={this.props.match.params.wid} aid={this.props.match.params.wid}
-                    hid={this.props.match.params.wid} videoid={this.props.avideo[0]._id}
+                    hid={this.props.match.params.wid} 
+                    sendTo={this.props.match.params.sendTo}
+                    videoid={this.props.avideo[0]._id}
                     videoname={this.props.avideo[0].name}></Task>
                 </div>
             )

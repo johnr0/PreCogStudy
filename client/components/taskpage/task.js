@@ -12,7 +12,7 @@ class Task extends Component{
     componentDidMount(){
         document.addEventListener("keydown", this.taskKeyInput.bind(this));
         setInterval(this.TimeCount.bind(this),10)
-        Meteor.call('annotation.startTask', this.props.wid, this.props.aid, this.props.hid, this.props.videoid)
+        Meteor.call('annotation.startTask', this.props.wid, this.props.aid, this.props.hid, this.props.videoid, this.props.sendTo)
     }
 
     TimeCount(){
