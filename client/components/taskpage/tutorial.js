@@ -15,15 +15,15 @@ class Tutorial extends Component{
         var confirm_message = ''
         if(correct_answer=='yes'){
             if(correct_answer==answer){
-                confirm_message = "Correct! Because the vehicle could have move into your lane, it could have harm your vehicle."
+                confirm_message = "Correct! Because the human could have move into your lane, it could have harm your vehicle."
             }else{
-                confirm_message = "Because the vehicle could have move into your lane, it could have harm your vehicle. Please keep the goal in your mind!"
+                confirm_message = "Because the human could have move into your lane, it could have harm your vehicle. Please keep the goal in your mind!"
             }
         }else if(correct_answer=='no'){
             if(correct_answer==answer){
-                confirm_message = "Because the tree cannot move into your lane, it cannot harm your vehicle. Please keep the goal in your mind!"
+                confirm_message = "Because the streetlight cannot move into your lane, it cannot harm your vehicle. Please keep the goal in your mind!"
             }else{
-                confirm_message = "Correct! Because the tree cannot move into your lane, it cannot harm your vehicle."
+                confirm_message = "Correct! Because the streetlight cannot move into your lane, it cannot harm your vehicle."
             }
         }
 
