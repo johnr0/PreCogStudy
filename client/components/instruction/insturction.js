@@ -28,7 +28,7 @@ class Instruction extends Component{
                 <img src="/static/task_interface.gif" style={{'border':'solid 3px black'}}></img>
                 <p>To annotate the object as dangerous, press "Left Arrow (←)".</p>
                 <p>To annotate the object as not dangerous, press "Right Arrow (→)".</p>
-                <p>You will do two rounds of tutorials first.</p>
+                <p>You will do two rounds of tutorials first. Then 2 task videos.</p>
                 <p>If you are ready to proceed, press the button below.</p>
                 <span onClick={this.toTutorial.bind(this)}
                 className={'btn '+(task_availability ? 'show':'hidden')}>Proceed</span>
