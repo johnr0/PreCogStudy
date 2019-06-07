@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {createContainer} from 'meteor/react-meteor-data';
 import Task from './task'
+import {KeyToString} from '../keycodes'
 
 class Ready extends Component{
 
@@ -9,26 +10,34 @@ class Ready extends Component{
     }
 
     taskKeyInput(event){
-        if(event.keyCode==38){
+        var start = this.props.match.params.keycode.split("_")[2]
+        if(event.keyCode==start){
             this.toTask()
         }
     }
 
     toTask(){
-        const {videoname, wid, aid, hid, sendTo} = this.props.match.params
-        window.location.href = '/task/'+videoname+"/"+wid+"/"+aid+"/"+hid+"/"+sendTo
+        const {keycode, videoname, wid, aid, hid, sendTo} = this.props.match.params
+        window.location.href = '/task/'+keycode+"/"+videoname+"/"+wid+"/"+aid+"/"+hid+"/"+sendTo
     }
     
     render(){
+        var keycode = this.props.match.params.keycode
+        // left: 37 / right: 39/ up: 38
+        //
+
+        var keys = KeyToString(keycode)
+
+
         var task_type = this.props.match.params.videoname
         return (
             <div>
                 <h4 className="taskHeader">Get ready for the {task_type}!</h4>
                 <h5 className="taskHeader">Goal: Decide whether an object in a green box can cause an accident to our vehicle.</h5>
-                <h5 className="taskHeader">In the task, <span className="btn">Press ← for Yes</span> and <span className="btn red">Press → for No</span></h5>
+                <h5 className="taskHeader">In the task, <span className="btn">Press <b>{keys['yes']}</b> for Yes</span> and <span className="btn red">Press <b>{keys['no']}</b> for No</span></h5>
                 <span style={{"margin":"auto", "display":"block", "pointerEvents":"none"}} 
                 className='btn'>
-                Press Up Arrow (↑) to proceed to {task_type}</span>
+                Press <b>{keys['start']}</b> to proceed to {task_type}</span>
             </div>
         )
     }

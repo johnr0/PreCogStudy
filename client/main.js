@@ -12,11 +12,13 @@ const routes = (
   <BrowserRouter>
     <div>
       <Switch>
-        <Route path="/instruction/" component={Instruction}/>
-        <Route path="/ready/:videoname/:wid/:aid/:hid/:sendTo" component={Ready}/>
-        <Route path="/task/:videoname/:wid/:aid/:hid/:sendTo" component={TaskWrapper}/>
-        <Route path="/submit/:wid/:aid/:hid/:sendTo" component={Submit}/>
-        <Route path="/videomanagement" component={VideoManagement}/>
+        <Route path="/instruction/:keycode" component={Instruction}/>
+        <Route path="/ready/:keycode/:videoname/:wid/:aid/:hid/:sendTo" component={Ready}/>
+        <Route path="/task/:keycode/:videoname/:wid/:aid/:hid/:sendTo" component={TaskWrapper}/>
+        <Route path="/submit/:keycode/:wid/:aid/:hid/:sendTo" component={Submit}/>
+        <Route path="/videomanagement/:keycode" component={VideoManagement}/>
+        <Route path="/videomanagement/" component={VideoManagement}/>
+        
       </Switch>
     </div>
   </BrowserRouter>

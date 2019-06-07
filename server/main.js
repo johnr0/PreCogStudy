@@ -16,6 +16,14 @@ Meteor.startup(() => {
     return Annotations.find({});
   })
 
+  Meteor.publish('keycode-annotations', function(keycode){
+    return Annotations.find({keycode});
+  })
+
+  Meteor.publish('worker-annotation', function(wid){
+    return Annotations.find({wid})
+  })
+
   Meteor.publish('a-anno', function(videoname, wid, aid){
     return Annotations.find({videoname:videoname, wid:wid, aid:aid});
   })

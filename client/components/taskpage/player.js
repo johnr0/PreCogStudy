@@ -20,7 +20,7 @@ class Player extends Component{
     }
 
     render(){
-        var playerWidth = window.innerWidth * 0.6
+        var playerWidth = window.innerWidth * 0.7
         var playerHeight = playerWidth/1.6 * 0.9
 
         return (

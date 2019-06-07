@@ -7,7 +7,7 @@ import { Videos, Annotations } from '../../../imports/collections/data';
 class TaskWrapper extends Component{
 
     taskDone(answer){
-        const {videoname, wid, aid, hid, sendTo} = this.props.match.params
+        const {keycode, videoname, wid, aid, hid, sendTo} = this.props.match.params
         var tut = this.props.match.params.videoname
         console.log(tut)
         var confirm_message = ''
@@ -44,16 +44,16 @@ class TaskWrapper extends Component{
             }        
         }
 
-        var redirect_path = "/ready/tutorial2"
+        var redirect_path = "/ready/"+keycode+"/tutorial2"
 
         if(tut=="tutorial1"){
-            redirect_path="/ready/tutorial2"
+            redirect_path="/ready/"+keycode+"/tutorial2"
         }else if(tut=="tutorial2"){
-            redirect_path="/ready/task3"
+            redirect_path="/ready/"+keycode+"/task3"
         }else if(tut=="task3"){
-            redirect_path="/ready/task4"
+            redirect_path="/ready/"+keycode+"/task4"
         }else if(tut=="task4"){
-            redirect_path="/submit"
+            redirect_path="/submit/"+keycode
         }
         redirect_path = redirect_path+"/"+wid+"/"+aid+"/"+hid+"/"+sendTo
         
@@ -68,6 +68,7 @@ class TaskWrapper extends Component{
             return (
                 <div>
                     <Task taskDone={this.taskDone.bind(this)} 
+                    keycode={this.props.match.params.keycode}
                     videoUrl={this.props.avideo[0].url}
                     wid={this.props.match.params.wid} aid={this.props.match.params.wid}
                     hid={this.props.match.params.wid} 

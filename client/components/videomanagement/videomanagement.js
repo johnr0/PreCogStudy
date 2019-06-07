@@ -44,7 +44,7 @@ class VideoManagement extends Component{
                     <div key={annotation._id}>
                         <div>
                             {annotation.wid} / PageDuration: {annotation.pageduration.toFixed(2)} / VideoDuration: {annotation.videoduration.toFixed(2)} / Prediction: {annotation.prediction.toString()}
-                            / Actual Duration: {((annotation.endtime-annotation.starttime)/1000).toFixed(2).toString()} / Mturk Code: {annotation.code}
+                            / Actual Duration: {((annotation.endtime-annotation.starttime)/1000).toFixed(2).toString()} / Mturk Code: {annotation.code} / keycode: {annotation.keycode}
                             <div className="btn red" onClick={this.removeWorker.bind(this, annotation.wid)}>Delete worker task</div>
                         </div>
                         
@@ -78,7 +78,12 @@ class VideoManagement extends Component{
 
 export default createContainer((props) => {
     Meteor.subscribe('all-videos', {})
-    Meteor.subscribe('all-annotations', {})
+    if(props.match.params.keycode!=undefined){
+        Meteor.subscribe('keycode-annotations',props.match.params.keycode)
+    }else{
+        Meteor.subscribe('all-annotations')
+    }
+    
     return {
         allVideos: Videos.find().fetch(),
         allAnnotations: Annotations.find().fetch(),

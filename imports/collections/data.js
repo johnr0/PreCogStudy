@@ -20,7 +20,7 @@ Meteor.methods({
         Videos.remove(vid)
     },
 
-    'annotation.startTask': function(wid, aid, hid, videoid,sendTo){
+    'annotation.startTask': function(wid, aid, hid, videoid,sendTo, keycode){
 
         var anno = Annotations.findOne({wid:wid, aid:aid, hid:hid, videoid:videoid})
         if(!anno){
@@ -35,19 +35,20 @@ Meteor.methods({
                 videoduration: -1,
                 code: sendTo,
                 prediction: "Not yet done",
+                keycode: keycode,
             })
         }
         console.log('annotation addition success')
     },
 
-    'annotation.annotate': function(wid, aid, hid, videoid, pageduration, prediction){
-        Annotations.update({wid:wid, aid:aid, hid:hid, videoid:videoid,},
+    'annotation.annotate': function(wid, aid, hid, videoid, pageduration, prediction, keycode){
+        Annotations.update({wid:wid, aid:aid, hid:hid, videoid:videoid, keycode:keycode,},
             {$set: {pageduration:pageduration, prediction:prediction, endtime:new Date(),}})
         console.log('annotate success', prediction)
     },
 
-    'annotation.videoduration': function(wid,aid,hid,videoid,videoduration){
-        Annotations.update({wid:wid, aid:aid, hid:hid, videoid:videoid,},
+    'annotation.videoduration': function(wid,aid,hid,videoid,videoduration, keycode){
+        Annotations.update({wid:wid, aid:aid, hid:hid, videoid:videoid, keycode:keycode,},
             {$set: {videoduration:videoduration}})
         console.log('videoduration success')
     },
