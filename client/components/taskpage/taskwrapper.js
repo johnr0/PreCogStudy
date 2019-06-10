@@ -49,10 +49,10 @@ class TaskWrapper extends Component{
         if(tut=="tutorial1"){
             redirect_path="/ready/"+keycode+"/tutorial2"
         }else if(tut=="tutorial2"){
+            redirect_path="/ready/"+keycode+"/task2"
+        }else if(tut=="task2"){
             redirect_path="/ready/"+keycode+"/task3"
         }else if(tut=="task3"){
-            redirect_path="/ready/"+keycode+"/task4"
-        }else if(tut=="task4"){
             redirect_path="/submit/"+keycode
         }
         redirect_path = redirect_path+"/"+wid+"/"+aid+"/"+hid+"/"+sendTo

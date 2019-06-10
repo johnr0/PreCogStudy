@@ -39,6 +39,7 @@ class Instruction extends Component{
                     <img src="/static/task_interface.gif" style={{'border':'solid 3px black'}}></img>
                     <p>To annotate the object as dangerous, press "{keys['yes']}" on keyboard.</p>
                     <p>To annotate the object as not dangerous, press "{keys['no']}" on keyboard.</p>
+                    <p style={{"display": (keys['hand']==undefined)?"none":"block"}}>Use your <b>two hands</b>, placing your left hand on "{keys['yes']}" and your right hand on "{keys['no']}".</p>
                     <p>You will do two rounds of tutorials first. Then 2 task videos.</p>
                     <p>If you are ready to proceed, press the button below.</p>
                     <span onClick={this.toTutorial.bind(this)}

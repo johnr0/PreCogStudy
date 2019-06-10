@@ -35,9 +35,13 @@ class Ready extends Component{
                 <h4 className="taskHeader">Get ready for the {task_type}!</h4>
                 <h5 className="taskHeader">Goal: Decide whether an object in a green box can cause an accident to our vehicle.</h5>
                 <h5 className="taskHeader">In the task, <span className="btn">Press <b>{keys['yes']}</b> for Yes</span> and <span className="btn red">Press <b>{keys['no']}</b> for No</span></h5>
-                <span style={{"margin":"auto", "display":"block", "pointerEvents":"none"}} 
+                <h5 className="taskHeader" style={{"display": (keys['hand']==undefined)?"none":"block"}}>Place your finger of left hand on {keys['yes']} and your finger of right hand on {keys['no']}.</h5>
+                <span style={{"margin":"auto", "pointerEvents":"none", "display": (keys['hand']!=undefined)?"none":"block"}} 
                 className='btn'>
                 Press <b>{keys['start']}</b> to proceed to {task_type}</span>
+                <span style={{"margin":"auto", "pointerEvents":"none", "display": (keys['hand']==undefined)?"none":"block"}} 
+                className='btn'>
+                Press <b>{keys['start']}</b> with your thumb to proceed to {task_type}</span>
             </div>
         )
     }
