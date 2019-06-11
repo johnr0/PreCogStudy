@@ -115,13 +115,13 @@ class Training extends Component{
         return (
             <div>
                 <h5 className="taskHeader">Training</h5>
-                <h5 className="taskHeader">Press the button as the screen indicate within {this.state.success_threshold} seconds!</h5>
+                <h5 className="taskHeader">Press yes if the screen is saying "Dangerous", and no if it is saying "Not Dangerous", within {this.state.success_threshold} seconds!</h5>
                 <h1 className="taskHeader" style={{"display":(this.state.dangerous)?"block":"none", 'fontSize':'8.4rem'}}>Dangerous</h1>
-                <h1 className="taskHeader" style={{"display":(this.state.dangerous)?"none":"block", 'fontSize':'8.4rem'}}>Safe</h1>
+                <h1 className="taskHeader" style={{"display":(this.state.dangerous)?"none":"block", 'fontSize':'8.4rem'}}>Not Dangerous</h1>
                 <div style={{"display":"grid"}}>
                     <div className="taskButtons">
-                    <span className="btn">Press <b>{keys['yes']}</b> for Dangerous</span>
-                    <span className="btn red" style={{"display": (keys['keynum']!=undefined)?"none":"inline-block"}}>Press <b>{keys['no']}</b> for Safe</span>
+                    <span className="btn">Press <b>{keys['yes']}</b> for Yes</span>
+                    <span className="btn red" style={{"display": (keys['keynum']!=undefined)?"none":"inline-block"}}>Press <b>{keys['no']}</b> for No</span>
                     </div>
                 </div>
                 <h5 className="taskHeader">Time: 
@@ -135,7 +135,7 @@ class Training extends Component{
                     <div className="taskHeader" style={{"position":"absolute", "top":"-50px", "left": innerwidth.toString()+"px"}}>
                         <h4 className="taskHeader" style={{"display": (this.state.wrong)?'block':'none', color:"red", opacity: 1-1.5*this.state.buttonTime}}>Wrong: -1</h4>
                         <h4 className="taskHeader" style={{"display": (this.state.right)?'block':'none', color:"green", opacity: 1-1.5*this.state.buttonTime}}>Correct: +1</h4>
-                        <h4 className="taskHeader" style={{"display": (this.state.late)?'block':'none', opacity: 1-1.5*this.state.buttonTime}}>Late: -1</h4>
+                        <h4 className="taskHeader" style={{"display": (this.state.late)?'block':'none', opacity: 1-1.5*this.state.buttonTime}}>Late: +0</h4>
                     </div>
                 </div>
                 <div className="taskHeader">Once you collect 10 points, you will go to the tutorial phase automatically.</div>

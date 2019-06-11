@@ -14,7 +14,7 @@ class Instruction extends Component{
         if(keys['training']==undefined){
             window.location.href = "/ready/"+keycode+"/tutorial1/"+Gup('workerId')+"/"+Gup('assignmentId')+"/"+Gup('hitId')+"/"+Gup('turkSubmitTo')
         }else{
-            window.location.href = "/training/"+keycode+"/"+Gup('workerId')+"/"+Gup('assignmentId')+"/"+Gup('hitId')+"/"+Gup('turkSubmitTo')
+            window.location.href = "/ready/"+keycode+"/training/"+Gup('workerId')+"/"+Gup('assignmentId')+"/"+Gup('hitId')+"/"+Gup('turkSubmitTo')
         }
         
     }
