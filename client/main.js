@@ -6,6 +6,7 @@ import TaskWrapper from './components/taskpage/taskwrapper'
 import VideoManagement from './components/videomanagement/videomanagement'
 import Ready from './components/taskpage/ready'
 import Submit from './components/mturkSubmit/submit'
+import Training from './components/taskpage/training'
 
 //<Route path="/instruction/:condition/:workerId/:assignmentId/:hitId/:videoname" component={Instruction} />
 const routes = (
@@ -18,7 +19,7 @@ const routes = (
         <Route path="/submit/:keycode/:wid/:aid/:hid/:sendTo" component={Submit}/>
         <Route path="/videomanagement/:keycode" component={VideoManagement}/>
         <Route path="/videomanagement/" component={VideoManagement}/>
-        
+        <Route path="/training/:keycode/:wid/:aid/:hid/:sendTo" component={Training}/>
       </Switch>
     </div>
   </BrowserRouter>

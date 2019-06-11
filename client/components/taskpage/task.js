@@ -79,7 +79,7 @@ class Task extends Component{
                 <div style={{"display":"grid"}}>
                     <div className="taskButtons">
                     <span className="btn">Press <b>{keys['yes']}</b> for Yes</span>
-                    <span className="btn red" style={{"display": (keys['keynum']!=undefined)?"none":"block"}}>Press <b>{keys['no']}</b> for No</span>
+                    <span className="btn red" style={{"display": (keys['keynum']!=undefined)?"none":"inline-block"}}>Press <b>{keys['no']}</b> for No</span>
                     </div>
                 </div>
             </div>

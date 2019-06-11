@@ -8,8 +8,15 @@ import {Annotations} from '../../../imports/collections/data'
 class Instruction extends Component{
 
     toTutorial(){
+        
         const {keycode} = this.props.match.params
-        window.location.href = "/ready/"+keycode+"/tutorial1/"+Gup('workerId')+"/"+Gup('assignmentId')+"/"+Gup('hitId')+"/"+Gup('turkSubmitTo')
+        var keys = KeyToString(keycode)
+        if(keys['training']==undefined){
+            window.location.href = "/ready/"+keycode+"/tutorial1/"+Gup('workerId')+"/"+Gup('assignmentId')+"/"+Gup('hitId')+"/"+Gup('turkSubmitTo')
+        }else{
+            window.location.href = "/training/"+keycode+"/"+Gup('workerId')+"/"+Gup('assignmentId')+"/"+Gup('hitId')+"/"+Gup('turkSubmitTo')
+        }
+        
     }
 
     render(){
@@ -25,6 +32,8 @@ class Instruction extends Component{
         // K:75 / M:77 /Z: 90 / 
         // E: 69 / I: 73 / Space: 32 / two hands: 2
         // Space: 32 / Q: 81 / Up: 38 / X / one key: 1 (32_81_38__1)
+        // left: 37 / right: 39 / up: 38 / X / X / training: t (37_39_38___t)
+        // E: 69 / I: 73 / Space: 32 / two hands: 2 / X / training: t (69_73_32_2__t)
 
         var keys = KeyToString(keycode)
         console.log(keys)
@@ -44,7 +53,8 @@ class Instruction extends Component{
                     <p style={{"display": (keys['keynum']!=undefined)?"none":"block"}}>To annotate the object as not dangerous, press "{keys['no']}" on keyboard.</p>
                     <p style={{"display": (keys['keynum']==undefined)?"none":"block"}}>If the object would not be dangerous, do not press any button.</p>
                     <p style={{"display": (keys['hand']==undefined)?"none":"block"}}>Use your <b>two hands</b>, placing your left hand on "{keys['yes']}" and your right hand on "{keys['no']}".</p>
-                    <p>You will do two rounds of tutorials first. Then 2 task videos.</p>
+                    <p style={{"display": (keys['training']==undefined)?"block":"none"}}>You will do two rounds of tutorials first. Then 2 task videos.</p>
+                    <p style={{"display": (keys['training']!=undefined)?"block":"none"}}>You will first go through a <b>training stage</b>. Then, you will do <b>two rounds of tutorials</b>. Then <b>2 task videos</b>.</p>
                     <p>If you are ready to proceed, press the button below.</p>
                     <span onClick={this.toTutorial.bind(this)}
                     className={'btn '+(task_availability ? 'show':'hidden')}>Proceed</span>
