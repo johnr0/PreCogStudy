@@ -264,7 +264,15 @@
     var yes = keyboardMap[parseInt(keycodes[0])]
     var no = keyboardMap[parseInt(keycodes[1])]
     var start = keyboardMap[parseInt(keycodes[2])]
-    var hand = keyboardMap[parseInt(keycodes[3])]
+    var hand = keycodes[3]
+    var keynum = keycodes[4]
+
+    if (hand==""){
+        hand=undefined
+    }  
+    if(keynum==""){
+        keynum=undefined
+    }
     console.log(hand)
-    return {yes: yes, no: no, start: start, hand: hand}
+    return {yes: yes, no: no, start: start, hand: hand, keynum: keynum}
   }

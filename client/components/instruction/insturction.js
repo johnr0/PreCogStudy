@@ -22,10 +22,12 @@ class Instruction extends Component{
 
         var keycode = this.props.match.params.keycode
         // left: 37 / right: 39/ up: 38
-        // K:75 / M:77 /Z: 90
+        // K:75 / M:77 /Z: 90 / 
+        // E: 69 / I: 73 / Space: 32 / two hands: 2
+        // Space: 32 / Q: 81 / Up: 38 / X / one key: 1 (32_81_38__1)
 
         var keys = KeyToString(keycode)
-
+        console.log(keys)
 
         if(this.props.workerAnnotations.length==0){
             return (
@@ -34,11 +36,13 @@ class Instruction extends Component{
                     <p>You will watch a short 1st point-of-view video of car driving down a road.</p>
                     <p>In the video, you will see an object that is marked with <span style={{"color":"green"}}>green box</span>.</p>
                     <p><b>As soon as possible</b>, You should decide whether the object can jump into the lane and <b>cause a car accident</b>.</p>
-                    <p>Remember two things! First, You should do it <b>as fast as you can</b>.</p>
+                    <p style={{"display": (keys['keynum']!=undefined)?"none":"block"}}>Remember two things! First, You should do it <b>as fast as you can</b>.</p>
+                    <p style={{"display": (keys['keynum']==undefined)?"none":"block"}}>Remember two things! First, You should do it <b>as fast as you can</b> <b>(but if you think it will not be dangerous, do not press any key)</b>.</p>
                     <p>Also, if the object can be dangerous in <b>near future</b>, you should decide the object to be dangerous, even if it is not yet dangerous!</p>
                     <img src="/static/task_interface.gif" style={{'border':'solid 3px black'}}></img>
                     <p>To annotate the object as dangerous, press "{keys['yes']}" on keyboard.</p>
-                    <p>To annotate the object as not dangerous, press "{keys['no']}" on keyboard.</p>
+                    <p style={{"display": (keys['keynum']!=undefined)?"none":"block"}}>To annotate the object as not dangerous, press "{keys['no']}" on keyboard.</p>
+                    <p style={{"display": (keys['keynum']==undefined)?"none":"block"}}>If the object would not be dangerous, do not press any button.</p>
                     <p style={{"display": (keys['hand']==undefined)?"none":"block"}}>Use your <b>two hands</b>, placing your left hand on "{keys['yes']}" and your right hand on "{keys['no']}".</p>
                     <p>You will do two rounds of tutorials first. Then 2 task videos.</p>
                     <p>If you are ready to proceed, press the button below.</p>

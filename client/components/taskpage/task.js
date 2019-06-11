@@ -22,6 +22,7 @@ class Task extends Component{
 
     taskKeyInput(event){
         var _this = this
+        var keys = KeyToString(this.props.keycode)
         if (event.keyCode==this.props.keycode.split("_")[0]){
             var vt = this.refs.player.getVideoTime().then(result => {
                 console.log(result)
@@ -37,7 +38,7 @@ class Task extends Component{
                 
             })
             console.log("Yes", this.state.pageTime)
-        }else if(event.keyCode==this.props.keycode.split("_")[1]){
+        }else if(event.keyCode==this.props.keycode.split("_")[1] && keys['keynum']==undefined){
             var vt = this.refs.player.getVideoTime().then(result => {
                 console.log(result)
                 // log video duration time at here
@@ -78,7 +79,7 @@ class Task extends Component{
                 <div style={{"display":"grid"}}>
                     <div className="taskButtons">
                     <span className="btn">Press <b>{keys['yes']}</b> for Yes</span>
-                    <span className="btn red">Press <b>{keys['no']}</b> for No</span>
+                    <span className="btn red" style={{"display": (keys['keynum']!=undefined)?"none":"block"}}>Press <b>{keys['no']}</b> for No</span>
                     </div>
                 </div>
             </div>
