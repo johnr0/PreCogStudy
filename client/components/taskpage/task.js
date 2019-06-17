@@ -87,8 +87,21 @@ class Task extends Component{
                 <h5 className="taskHeader">Complete the task ASAP!</h5>
                 <div style={{"position":"relative"}}>
                     <div className="TaskBlind" style={{display:(this.state.videoStarted)?'none':'block'}}>
-                        <span className="TaskBlindText" style={{display:(this.state.videoLoaded)?'none':'block'}}>Please wait... the video is being loaded.</span>
-                        <span className="TaskBlindText" style={{display:(this.state.videoLoaded)?'block':'none'}}>Video loaded. The task will start soon!</span>
+                        <div className="TaskBlindText">
+                            <span  style={{display:(this.state.videoLoaded)?'none':'block'}}>Please wait... the video is being loaded.</span>
+                            <span style={{display:(this.state.videoLoaded)?'block':'none'}}>Video loaded. The task will start soon!</span>
+                        </div>
+                        <div className="preloader-wrapper big active" style={{position: 'relative', top:'0%'}}>
+                            <div className="spinner-layer spinner-blue-only">
+                            <div className="circle-clipper left">
+                                <div className="circle"></div>
+                            </div><div className="gap-patch">
+                                <div className="circle"></div>
+                            </div><div className="circle-clipper right">
+                                <div className="circle"></div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                     <Player videoUrl={this.props.videoUrl} lateTask={this.lateTask.bind(this)} addKeyListener={this.addKeyListener.bind(this)} 
                     videoisLoaded={this.videoisLoaded.bind(this)} ref="player">
