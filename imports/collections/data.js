@@ -3,6 +3,17 @@ import  validUrl from 'valid-url';
 import { check, Match } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
+
 Meteor.methods({
     'video.add': function(videoname, url){
         if (validUrl.isUri(url)){
@@ -23,6 +34,8 @@ Meteor.methods({
     'annotation.startTask': function(wid, aid, hid, videoid,sendTo, keycode){
 
         var anno = Annotations.findOne({wid:wid, aid:aid, hid:hid, videoid:videoid})
+        var worker=Workers.find({wid:wid}).fetch()[0]
+        order = worker.cur_task
         if(!anno){
             Annotations.insert({
                 videoid:videoid,
@@ -36,15 +49,64 @@ Meteor.methods({
                 code: sendTo,
                 prediction: "Not yet done",
                 keycode: keycode,
+                order: order,
+            })
+            console.log('annotation addition success')
+        }
+        
+    },
+
+    'worker.startTask': function(wid, aid, hid, sendTo, keycode){
+        //Workers.remove({})
+        var worker=Workers.find({wid:wid}).fetch()
+        console.log(worker)
+        if (worker.length==0){
+            // 10 tasks
+            // 4 dangerous cases (task_danger_n)
+            // 4 not dangerous cases (task_safe_n)
+            // 1 dangerous case that measures fatigue (task_danger_fatigue)
+            // 1 not dangerous case that measures fatigue (task_safe_fatigue)
+            var order = []
+            var last =""
+            if (Math.random()>=0.5){
+                order.push('task_danger_fatigue')
+                last = 'task_safe_fatigue'
+            }else{
+                order.push('task_safe_fatigue')
+                last = 'task_danger_fatigue'
+            }
+            var internal_order = ['task_danger_0', 'task_danger_1', 'task_danger_2', 'task_danger_3', 'task_safe_0', 'task_safe_1', 'task_safe_2', 'task_safe_3']
+            shuffle(internal_order);
+
+            order = order.concat(internal_order)
+            order.push(last)
+
+            Workers.insert({
+                wid:wid,
+                aid:aid,
+                hid:hid,
+                code: sendTo,
+                keycode:keycode,
+                task_list: order,
+                cur_task: 0,
             })
         }
-        console.log('annotation addition success')
+    },
+
+    'worker.nextTask': function(wid, aid, hid){
+        console.log('ADDITION called')
+        Workers.update({wid:wid, aid:aid, hid:hid},
+            {
+                $inc: {cur_task: 1}
+            }            
+        )
+        console.log(Workers.find({wid:wid, aid:aid, hid:hid}))
     },
 
     'annotation.annotate': function(wid, aid, hid, videoid, pageduration, prediction, keycode){
         Annotations.update({wid:wid, aid:aid, hid:hid, videoid:videoid, keycode:keycode,},
             {$set: {pageduration:pageduration, prediction:prediction, endtime:new Date(),}})
-        console.log('annotate success', prediction)
+        console.log('annotate success', prediction, wid, aid, hid, videoid, Annotations.find({wid:wid, aid:aid, hid:hid, videoid:videoid, keycode:keycode,}).fetch())
     },
 
     'annotation.videoduration': function(wid,aid,hid,videoid,videoduration, keycode){
@@ -55,8 +117,10 @@ Meteor.methods({
 
     'annotation.removeWorker': function(wid){
         Annotations.remove({wid:wid})
+        Workers.remove({wid:wid})
     }
 })
 
 export const Videos = new Mongo.Collection('videos');
+export const Workers = new Mongo.Collection('workers');
 export const Annotations = new Mongo.Collection('annotations');

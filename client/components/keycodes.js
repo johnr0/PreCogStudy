@@ -267,6 +267,7 @@
     var hand = keycodes[3]
     var keynum = keycodes[4]
     var training = keycodes[5]
+    var question = keycodes[6]
 
     if (hand==""){
         hand=undefined
@@ -277,6 +278,9 @@
     if(training==""){
         training=undefined
     }
+    if(question==""){
+        question=undefined
+    }
     console.log(hand)
-    return {yes: yes, no: no, start: start, hand: hand, keynum: keynum, training: training}
+    return {yes: yes, no: no, start: start, hand: hand, keynum: keynum, training: training, question:question}
   }

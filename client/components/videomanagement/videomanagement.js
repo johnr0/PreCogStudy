@@ -44,7 +44,7 @@ class VideoManagement extends Component{
                     <div key={annotation._id}>
                         <div>
                             {annotation.wid} / PageDuration: {annotation.pageduration.toFixed(2)} / VideoDuration: {annotation.videoduration.toFixed(2)} / Prediction: {annotation.prediction.toString()}
-                            / Actual Duration: {((annotation.endtime-annotation.starttime)/1000).toFixed(2).toString()} / Mturk Code: {annotation.code} / keycode: {annotation.keycode}
+                            / Actual Duration: {((annotation.endtime-annotation.starttime)/1000).toFixed(2).toString()} / Mturk Code: {annotation.code} / keycode: {annotation.keycode} / order: {annotation.order}
                             <div className="btn red" onClick={this.removeWorker.bind(this, annotation.wid)}>Delete worker task</div>
                         </div>
                         

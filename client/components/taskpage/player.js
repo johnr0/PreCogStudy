@@ -13,6 +13,15 @@ class Player extends Component{
                 
             }    
         })
+        this.player.on('loaded', function(data){
+            _this.player.pause()
+            _this.props.videoisLoaded()
+            setTimeout(function(){
+                _this.player.play()
+                _this.props.addKeyListener()
+            }, 3000)
+            //_this.player.play();
+        })
     }
 
     getVideoTime(){
@@ -25,9 +34,9 @@ class Player extends Component{
 
         return (
             <div>
-                <iframe id="player" src={this.props.videoUrl+"?&background=1&autoplay=1"}
+                <iframe id="player" src={this.props.videoUrl+"?&background=0&autoplay=1"}
                 width={playerWidth.toString()+"px"} height={playerHeight.toString()+"px"} frameborder="0" 
-                allow="autoplay;" className="taskVideo">
+                allow="autoplay" className="taskVideo">
                 </iframe>
             </div>
         )
