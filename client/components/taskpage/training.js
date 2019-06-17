@@ -199,7 +199,7 @@ class Training extends Component{
                 <div className="taskHeader" style={{"fontSize": "0.8rem"}}>(Score does not go below 0)</div>
                     
                 </div>
-                <div className="taskHeader">Once you collect 10 points, you will go to the tutorial phase automatically.</div>
+                <div className="taskHeader">Once you collect 20 points, you will go to the tutorial phase automatically.</div>
             </div>)
     }
 }

@@ -30,18 +30,18 @@ class TaskWrapper extends Component{
                 }else if(answer=='no'){
                     confirm_message = "You didn't get it correct, because the human could have move into your lane. Please keep the goal in your mind!"
                 }else if(answer=='late'){
-                    confirm_message = "You should have answered early! Also, because the human could have move into your lane, it could have caused a catastrophic accident. Please keep the goal in your mind!"
+                    confirm_message = "You should have answered early! Also, the human could have move into your lane. Please keep the goal in your mind!"
                 }
             }else if(correct_answer=='no'){
                 if(correct_answer==answer){
-                    confirm_message = "Correct, because the streetlight cannot move into your lane!"
+                    confirm_message = "Correct, because the object cannot move into your lane!"
                 }else if(answer=='yes'){
-                    confirm_message = "You didn't get it correct, because the streetlight cannot move into your lane. Please keep the goal in your mind!"
+                    confirm_message = "You didn't get it correct, because the object cannot move into your lane. Please keep the goal in your mind!"
                 }else if(answer=='late'){
                     if (keys['keynum']!=undefined){
-                        confirm_message = "Correct, because the streetlight cannot move into your lane!"
+                        confirm_message = "Correct, because the object cannot move into your lane!"
                     }else{
-                        confirm_message = "You should have answered early! Also, because the streetlight cannot move into your lane, it cannot harm your vehicle. Please keep the goal in your mind!"
+                        confirm_message = "You should have answered early! Also, the object cannot move into your lane. Please keep the goal in your mind!"
                     }   
                 }
             }
