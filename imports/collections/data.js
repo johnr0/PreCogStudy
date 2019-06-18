@@ -34,7 +34,7 @@ Meteor.methods({
     'annotation.startTask': function(wid, aid, hid, videoid,sendTo, keycode){
 
         var anno = Annotations.findOne({wid:wid, aid:aid, hid:hid, videoid:videoid})
-        var worker=Workers.find({wid:wid}).fetch()[0]
+        var worker=Workers.find({wid:wid, aid:aid, hid:hid}).fetch()[0]
         order = worker.cur_task
         if(!anno){
             Annotations.insert({
@@ -58,7 +58,7 @@ Meteor.methods({
 
     'worker.startTask': function(wid, aid, hid, sendTo, keycode){
         //Workers.remove({})
-        var worker=Workers.find({wid:wid}).fetch()
+        var worker=Workers.find({wid:wid, aid:aid, hid:hid}).fetch()
         console.log(worker)
         if (worker.length==0){
             // 10 tasks
@@ -91,6 +91,14 @@ Meteor.methods({
                 cur_task: 0,
             })
         }
+    },
+
+    'worker.trainingend': function(wid, aid, hid, trainingButtonHits, trainingRounds){
+        console.log(wid, aid, hid, trainingButtonHits, trainingRounds)
+        Workers.update({wid:wid, aid:aid, hid:hid}, 
+            {
+                $set: {trainingButtonHits:trainingButtonHits, trainingRounds:trainingRounds}
+            })
     },
 
     'worker.nextTask': function(wid, aid, hid){

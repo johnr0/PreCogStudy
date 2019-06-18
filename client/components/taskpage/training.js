@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {KeyToString} from '../keycodes';
+import { Meteor } from 'meteor/meteor';
 
 class Training extends Component{
     state={
@@ -14,6 +15,8 @@ class Training extends Component{
         wrong: false,
         right: false,
         late: false,
+        trainingRounds: 0,
+        trainingButtonHits: 0,
     }
 
     componentDidMount(){
@@ -55,6 +58,7 @@ class Training extends Component{
 
     newTraining(){
         this.state.trainingTime = 0
+        this.setState({trainingRounds: this.state.trainingRounds+1})
         if(Math.random()<0.5){
             this.setState({dangerous: true, trainingTime: 0, taskStart: false})
         }else{
@@ -74,6 +78,7 @@ class Training extends Component{
         var {keycode, wid, aid, hid, sendTo} = this.props.match.params;
         var redirect_path
         if(this.state.success_count>=this.state.success_count_threshold){
+            Meteor.call('worker.trainingend', wid, aid, hid, this.state.trainingButtonHits, this.state.trainingRounds);
             redirect_path = "/ready/"+keycode+"/tutorial1/"+wid+"/"+aid+"/"+hid+"/"+sendTo
             window.location.href=redirect_path
         }
@@ -91,7 +96,8 @@ class Training extends Component{
         var keys = KeyToString(keycode)
         
         if ((event.keyCode==keycode.split("_")[0]&&event.keyCode!=16) || (event.keyCode==16&&keycode.split("_")[0]==16&&event.location === KeyboardEvent.DOM_KEY_LOCATION_LEFT)){
-            this.setState({"buttonTime": 0})
+            this.setState({"buttonTime": 0, "trainingButtonHits": this.state.trainingButtonHits+1})
+
             if(this.state.dangerous){
                 if(this.state.trainingTime<=this.state.success_threshold){
                     this.increaseCounter()
@@ -116,7 +122,7 @@ class Training extends Component{
             }
             
         }else if(((event.keyCode==keycode.split("_")[1]&&event.keyCode!=16)||(event.keyCode==16&&keycode.split("_")[1]==16&&event.location === KeyboardEvent.DOM_KEY_LOCATION_RIGHT)) && keys['keynum']==undefined){
-            this.setState({"buttonTime": 0})
+            this.setState({"buttonTime": 0, "trainingButtonHits": this.state.trainingButtonHits+1})
             if(!this.state.dangerous){
                 if(this.state.trainingTime<=this.state.success_threshold){
                     this.increaseCounter()
