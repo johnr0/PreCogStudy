@@ -39,6 +39,10 @@ Meteor.startup(() => {
     return Annotations.find({videoname:videoname, wid:wid, aid:aid});
   })
 
+  Meteor.publish('all-workers', function(){
+    return Workers.find({});
+  })
+
   Meteor.publish('a-worker', function(wid){
     return Workers.find({wid});
   })

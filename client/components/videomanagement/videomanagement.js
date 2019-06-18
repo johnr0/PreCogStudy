@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {createContainer} from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Videos, Annotations } from '../../../imports/collections/data';
+import { Videos, Annotations, Workers } from '../../../imports/collections/data';
 
 class VideoManagement extends Component{
 
@@ -55,7 +55,19 @@ class VideoManagement extends Component{
         })
     }
 
+    downloadTextFile(text, name){
+        const a = document.createElement('a');
+        //const type = name.split(".").pop();
+        console.log(text)
+        a.href = "data: "+text
+        a.download = name;
+        a.click();
+    }
+
     render(){
+        var d = {video: this.props.allVideos, annotation: this.props.allAnnotations, worker: this.props.allWorkers}
+        var data = 'text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(d))
+
         return (
             <div>
                 <h4>Add videos</h4>
@@ -71,6 +83,9 @@ class VideoManagement extends Component{
                 <ul className="collapsible">
                     {this.renderVideos()}
                 </ul>
+                <div>
+                    <span className="btn" onClick={this.downloadTextFile.bind(this, data, 'precogdata.json')}>Download Data</span>
+                </div>
             </div>
         )
     }
@@ -83,9 +98,11 @@ export default createContainer((props) => {
     }else{
         Meteor.subscribe('all-annotations')
     }
+    Meteor.subscribe('all-workers')
     
     return {
         allVideos: Videos.find().fetch(),
         allAnnotations: Annotations.find().fetch(),
+        allWorkers: Workers.find().fetch(),
     }
 }, VideoManagement)
