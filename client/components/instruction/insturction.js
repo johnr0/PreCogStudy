@@ -61,10 +61,8 @@ class Instruction extends Component{
                     <h4>The goal of the task is to discern whether an object 'can' {(keys['question']==undefined)?'be dangerous to our vehicle in near future':'move close to our vehicle within 5~6 seconds'}.</h4>
                     <p>You will watch short 1st point-of-view videos of a car driving down a road.</p>
                     <p>In each video, you will see an object that is marked with <span style={{"color":"green"}}>green box</span>.</p>
-                    <p><b>As soon as possible</b>, You should decide whether {(keys['question']==undefined)?'the object can jump into the lane and cause a car accident':'the object can move close to our vehicle within 5~6 seconds (possibly can cause an accident)'}.</p>
-                    <p style={{"display": (keys['keynum']!=undefined)?"none":"block"}}>Remember two things! First, you should do it <b>as fast as you can</b>.</p>
-                    <p style={{"display": (keys['keynum']==undefined)?"none":"block"}}>Remember two things! First, you should do it <b>as fast as you can</b> <b>(but if you think it will not be {(keys['question']==undefined)?'dangerous':'moving'}, do not press any key)</b>.</p>
-                    <p>Also, if the object can {(keys['question']==undefined)?'be dangerous':'move close to our vehicle'} in <b>near future</b>, you should decide the object as {(keys['question']==undefined)?'dangerous':'movable'}, even if it is not yet {(keys['question']==undefined)?'dangerous':'moving'}!</p>
+                    <p><b>As soon as possible</b>, You should decide whether {(keys['question']==undefined)?'the object can jump into the lane and cause a car accident':'the object can move close to our vehicle within 5~6 seconds (possibly causing an accident)'}.</p>
+                    <p>If the object can {(keys['question']==undefined)?'be dangerous':'move close to our vehicle'} in <b>near future</b>, you should decide the object as {(keys['question']==undefined)?'dangerous':'movable'}, even when it is not yet {(keys['question']==undefined)?'dangerous':'moving'}!</p>
                     <img src="/static/task_interface.gif" style={{'border':'solid 3px black'}}></img>
                     <p>To annotate the object as {(keys['question']==undefined)?'dangerous':'movable'}, press "{keys['yes']}" on keyboard.</p>
                     <p style={{"display": (keys['keynum']!=undefined)?"none":"block"}}>To annotate the object as not {(keys['question']==undefined)?'dangerous':'movable'}, press "{keys['no']}" on keyboard.</p>

@@ -16,6 +16,7 @@ class TaskWrapper extends Component{
         var tut = this.props.match.params.videoname
         console.log(tut)
         var confirm_message = ''
+        var tut_add = ''
         if(tut.includes('tutorial')){
             var correct_answer = 'yes'
             if (tut=="tutorial1"){
@@ -26,18 +27,24 @@ class TaskWrapper extends Component{
             
             if(correct_answer=='yes'){
                 if(correct_answer==answer){
+                    tut_add='correct'
                     confirm_message = "Correct, because the human could have move into your lane."
                 }else if(answer=='no'){
+                    tut_add='wrong'
                     confirm_message = "You didn't get it correct, because the human could have move into your lane. Please keep the goal in your mind!"
                 }else if(answer=='late'){
+                    tut_add='late'
                     confirm_message = "You should have answered early! Also, the human could have move into your lane. Please keep the goal in your mind!"
                 }
             }else if(correct_answer=='no'){
                 if(correct_answer==answer){
+                    tut_add='correct'
                     confirm_message = "Correct, because the object cannot move into your lane!"
                 }else if(answer=='yes'){
+                    tut_add='wrong'
                     confirm_message = "You didn't get it correct, because the object cannot move into your lane. Please keep the goal in your mind!"
                 }else if(answer=='late'){
+                    tut_add='late'
                     if (keys['keynum']!=undefined){
                         confirm_message = "Correct, because the object cannot move into your lane!"
                     }else{
@@ -61,18 +68,18 @@ class TaskWrapper extends Component{
         var redirect_path = "/ready/"+keycode+"/tutorial2"
 
         if(tut=="tutorial1"){
-            redirect_path="/ready/"+keycode+"/tutorial2"
+            redirect_path="/ready/"+keycode+"/tutorial2_"+tut_add
         }else if(tut=="tutorial2"){
-            redirect_path="/ready/"+keycode+"/0"
+            redirect_path="/ready/"+keycode+"/0_"+tut_add
         }else if(tut!='9'){
             
-            redirect_path="/ready/"+keycode+"/"+(parseInt(videoname)+1).toString()
+            redirect_path="/task/"+keycode+"/"+(parseInt(videoname)+1).toString()
         }else{
             redirect_path ="/submit/"+keycode
         }
         redirect_path = redirect_path+"/"+wid+"/"+aid+"/"+hid+"/"+sendTo
         
-        alert(confirm_message)
+        //alert(confirm_message)
         // update the current task number
         window.location.href=redirect_path
         if(!tut.includes('tut')){
@@ -90,10 +97,10 @@ class TaskWrapper extends Component{
             if(this.props.aworker!=undefined){
                 if(this.props.aworker.cur_task != parseInt(vdname)){
                     if(this.state.started==false){
-                        alert("You cannot rewatch the video. You will be redirected to the video you should work on.")
+                        //alert("You cannot rewatch the video. You will be redirected to the video you should work on.")
                         const {keycode, videoname, wid, aid, hid, sendTo} = this.props.match.params
                         if(this.props.aworker.cur_task!='10'){
-                            var redirect_path = "/ready/"+keycode+"/"+(parseInt(this.props.aworker.cur_task)).toString()+"/"+wid+"/"+aid+"/"+hid+"/"+sendTo
+                            var redirect_path = "/task/"+keycode+"/"+(parseInt(this.props.aworker.cur_task)).toString()+"/"+wid+"/"+aid+"/"+hid+"/"+sendTo
                             window.location.href=redirect_path
                         }else{
                             var redirect_path = "/submit/"+keycode

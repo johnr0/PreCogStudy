@@ -89,15 +89,18 @@ Meteor.methods({
                 keycode:keycode,
                 task_list: order,
                 cur_task: 0,
+                trainingText: [],
+                trainingInput: [],
+                trainingLatency: [],
             })
         }
     },
 
-    'worker.trainingend': function(wid, aid, hid, trainingButtonHits, trainingRounds){
-        console.log(wid, aid, hid, trainingButtonHits, trainingRounds)
+    'worker.trainingend': function(wid, aid, hid, text, inputs, times){
+        //console.log(wid, aid, hid, trainingButtonHits, trainingRounds)
         Workers.update({wid:wid, aid:aid, hid:hid}, 
             {
-                $set: {trainingButtonHits:trainingButtonHits, trainingRounds:trainingRounds}
+                $push: {trainingText: text, trainingInput:inputs, trainingLatency:times}
             })
     },
 

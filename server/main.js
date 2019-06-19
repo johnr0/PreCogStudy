@@ -4,7 +4,7 @@ import { Videos, Annotations, Workers } from '../imports/collections/data';
 Meteor.startup(() => {
   // code to run on server at startup
   Meteor.publish('all-videos', function(){
-    console.log(Videos.find({}).fetch())
+    //console.log(Videos.find({}).fetch())
     return Videos.find({});
   })
 
@@ -15,7 +15,7 @@ Meteor.startup(() => {
       vname=name
     }else{
       var worker = Workers.find({wid}).fetch()[0]
-      console.log(worker)
+      //console.log(worker)
       vname = worker.task_list[parseInt(name)]
     }
     
@@ -23,7 +23,7 @@ Meteor.startup(() => {
   })
 
   Meteor.publish('all-annotations', function(){
-    console.log(Annotations.find({}).fetch())
+    //console.log(Annotations.find({}).fetch())
     return Annotations.find({});
   })
 

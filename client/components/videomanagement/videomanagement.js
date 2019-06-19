@@ -67,7 +67,7 @@ class VideoManagement extends Component{
     render(){
         var d = {video: this.props.allVideos, annotation: this.props.allAnnotations, worker: this.props.allWorkers}
         var data = 'text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(d))
-
+        console.log(this.props.allVideos)
         return (
             <div>
                 <h4>Add videos</h4>
