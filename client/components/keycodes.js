@@ -1,3 +1,4 @@
+import Training from "./taskpage/training";
 
 
   export function KeyToString(keycode){
@@ -268,6 +269,7 @@
     var keynum = keycodes[4]
     var training = keycodes[5]
     var question = keycodes[6]
+    var trainingready = keycodes[7]
 
     if (hand==""){
         hand=undefined
@@ -281,6 +283,12 @@
     if(question==""){
         question=undefined
     }
+
+    if(trainingready=="" || trainingready==undefined){
+      trainingready = 3
+    }else{
+      trainingready = parseFloat(trainingready)
+    }
     console.log(hand)
-    return {yes: yes, no: no, start: start, hand: hand, keynum: keynum, training: training, question:question}
+    return {yes: yes, no: no, start: start, hand: hand, keynum: keynum, training: training, question:question, trainingready:trainingready}
   }

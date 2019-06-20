@@ -27,6 +27,9 @@ class Training extends Component{
     }
 
     componentDidMount(){
+        var keycode= this.props.match.params.keycode;
+        var keys = KeyToString(keycode)
+        this.setState({"readyTime": parseFloat(keys['trainingready'])})
         document.addEventListener("keydown", this.taskKeyInput.bind(this));
         setInterval(this.TimeCount.bind(this),10)
     }
@@ -218,10 +221,10 @@ class Training extends Component{
                         <span className="NotiBackground grey" style={{visibility:(this.state.late)?'visible':'hidden', opacity: (this.state.buttonTime*1.5<1)?1-1.5*this.state.buttonTime : 0}}></span>
                         
                         <span className="TrainingText" style={{"display":(this.state.taskStart&&this.state.dangerous)?"block":"none", 
-                        paddingLeft: (this.state.position=='left')?'0px':'200px', paddingRight: (this.state.position=='right')?'0px':'200px'}}>
+                        paddingLeft: (this.state.position=='left')?'0px':'0px', paddingRight: (this.state.position=='right')?'0px':'0px'}}>
                         {(keys['question']==undefined)?'Dangerous':'Movable'}</span>
                         <span className="TrainingText" style={{"display":(this.state.taskStart&&(!this.state.dangerous))?"block":"none", 
-                        paddingLeft: (this.state.position=='left')?'0px':'200px', paddingRight: (this.state.position=='right')?'0px':'200px'}}>
+                        paddingLeft: (this.state.position=='left')?'0px':'0px', paddingRight: (this.state.position=='right')?'0px':'0px'}}>
                         {(keys['question']==undefined)?'Not Dangerous':"Won't move"}</span>
 
                         <div className="TrainingBlind" style={{display:(this.state.taskStart)?'none':'block'}}>
