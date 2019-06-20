@@ -40,6 +40,32 @@ Meteor.startup(() => {
   })
 
   Meteor.publish('all-workers', function(){
+    var w = Workers.find({}).fetch();
+    for (var i=0; i<w.length; i++){
+      var input = w[i].trainingInput.slice(0)
+      var latency = w[i].trainingLatency.slice(0)
+      var text = w[i].trainingText.slice(0)
+      var position = w[i].trainingPosition.slice(0)
+
+      var idxs=[]
+
+      for (var j=0; j<input.length; j++){
+        if (input[j].length>20){
+          inputs.splice(j, 1);
+          latency.splice(j, 1);
+          text.splice(j, 1);
+          position.splice(j, 1);
+        }
+      }
+
+      Workers.update({_id:w[i]._id}, {$set:{
+        trainingText:text, trainingInput: input, trainingLatency: latency, trainingPosition: position,
+      }})
+
+
+    }
+
+
     return Workers.find({});
   })
 

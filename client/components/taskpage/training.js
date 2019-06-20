@@ -46,22 +46,22 @@ class Training extends Component{
                     this.state.times.push(this.state.trainingTime)
                     this.state.inputs.push('late')
                 
-                if(keys['keynum']==undefined){
-                    this.setState({wrong:true, right:false, late:false, buttonTime: 0})
-                    this.decreaseCounter();
-                }else{
-                    if(this.state.dangerous){
+                    if(keys['keynum']==undefined){
                         this.setState({wrong:true, right:false, late:false, buttonTime: 0})
                         this.decreaseCounter();
                     }else{
-                        this.setState({wrong:false, right:true, late:false, buttonTime: 0})
-                        this.increaseCounter();
-                        //this.checkNextPage()
+                        if(this.state.dangerous){
+                            this.setState({wrong:true, right:false, late:false, buttonTime: 0})
+                            this.decreaseCounter();
+                        }else{
+                            this.setState({wrong:false, right:true, late:false, buttonTime: 0})
+                            this.increaseCounter();
+                            //this.checkNextPage()
+                        }
+                        
                     }
                     
-                }
-                
-                this.checkNextPage();
+                    this.checkNextPage();
                 }
                 
             }
