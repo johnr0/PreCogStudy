@@ -40,10 +40,7 @@ Meteor.startup(() => {
   })
 
   Meteor.publish('all-workers', function(){
-    
-
-
-    return Workers.find({});
+   return Workers.find({});
   })
 
   Meteor.publish('a-worker', function(wid){
