@@ -42,8 +42,9 @@ class Training extends Component{
             }
         }else{
             if(this.state.trainingTime>=this.state.success_threshold){
-                this.state.times.push(this.state.trainingTime)
-                this.state.inputs.push('late')
+                if(this.state.inputs.length<20){
+                    this.state.times.push(this.state.trainingTime)
+                    this.state.inputs.push('late')
                 
                 if(keys['keynum']==undefined){
                     this.setState({wrong:true, right:false, late:false, buttonTime: 0})
@@ -61,6 +62,8 @@ class Training extends Component{
                 }
                 
                 this.checkNextPage();
+                }
+                
             }
         }
     }
