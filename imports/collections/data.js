@@ -67,7 +67,7 @@ Meteor.methods({
 
       for (var j=0; j<input.length; j++){
         if (input[j].length>20){
-          inputs.splice(j, 1);
+          input.splice(j, 1);
           latency.splice(j, 1);
           text.splice(j, 1);
           position.splice(j, 1);
