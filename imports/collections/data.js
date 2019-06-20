@@ -92,15 +92,16 @@ Meteor.methods({
                 trainingText: [],
                 trainingInput: [],
                 trainingLatency: [],
+                trainingPosition: [],
             })
         }
     },
 
-    'worker.trainingend': function(wid, aid, hid, text, inputs, times){
+    'worker.trainingend': function(wid, aid, hid, text, inputs, times, positions){
         //console.log(wid, aid, hid, trainingButtonHits, trainingRounds)
         Workers.update({wid:wid, aid:aid, hid:hid}, 
             {
-                $push: {trainingText: text, trainingInput:inputs, trainingLatency:times}
+                $push: {trainingText: text, trainingInput:inputs, trainingLatency:times, trainingPosition:positions}
             })
     },
 

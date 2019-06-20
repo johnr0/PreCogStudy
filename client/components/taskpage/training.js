@@ -18,9 +18,11 @@ class Training extends Component{
         late: false,
         trainingRounds: 1,
         trainingButtonHits: 0,
+        position: 'left',
         texts: ['danger'],
         inputs: [],
         times: [], 
+        positions: [],
 
     }
 
@@ -73,6 +75,13 @@ class Training extends Component{
             this.setState({dangerous: false, trainingTime: 0, taskStart: false})
             this.state.texts.push('safe')
         }
+        if(Math.random()<0.5){
+            this.setState({position: 'left'})
+            this.state.positions.push('left')
+        }else{
+            this.setState({position:'right'})
+            this.state.positions.push('right')
+        }
     }
 
     increaseCounter(){
@@ -88,7 +97,7 @@ class Training extends Component{
         if(this.state.trainingRounds>=this.state.total_rounds){
             // record the results
             var {keycode, wid, aid, hid, sendTo} = this.props.match.params;
-            Meteor.call('worker.trainingend', wid, aid, hid, this.state.texts, this.state.inputs, this.state.times);
+            Meteor.call('worker.trainingend', wid, aid, hid, this.state.texts, this.state.inputs, this.state.times, this.state.positions);
             var redirect_path
             if(this.state.success_count>=this.state.success_count_threshold){
                 redirect_path = "/ready/"+keycode+"/tutorial1/"+wid+"/"+aid+"/"+hid+"/"+sendTo
@@ -197,16 +206,20 @@ class Training extends Component{
         return (
             <div>
                 <h5 className="taskHeader">Training</h5>
-                <h5 className="taskHeader" style={{"display": (keys['keynum']!=undefined)?"none":"block"}}><span className="btn">Press <b>{keys['yes']}</b></span> if the screen is saying "{(keys['question']==undefined)?'Dangerous':'Movable'}", and <span className="btn red">Press <b>{keys['no']}</b></span> if it is saying "{(keys['question']==undefined)?'Not Dangerous':'Not Movable'}", within {this.state.success_threshold} seconds!</h5>
-                <h5 className="taskHeader" style={{"display": (keys['keynum']==undefined)?"none":"block"}}><span className="btn">Press <b>{keys['yes']}</b></span> if the screen is saying "{(keys['question']==undefined)?'Dangerous':'Movable'}" within {this.state.success_threshold} seconds, and press nothing if it is saying "{(keys['question']==undefined)?'Not Dangerous':'Not Movable'}"!</h5>
+                <h5 className="taskHeader" style={{"display": (keys['keynum']!=undefined)?"none":"block"}}><span className="btn">Press <b>{keys['yes']}</b></span> if the screen is saying "{(keys['question']==undefined)?'Dangerous':'Movable'}", and <span className="btn red">Press <b>{keys['no']}</b></span> if it is saying "{(keys['question']==undefined)?'Not Dangerous':"Won't move"}", within {this.state.success_threshold} seconds!</h5>
+                <h5 className="taskHeader" style={{"display": (keys['keynum']==undefined)?"none":"block"}}><span className="btn">Press <b>{keys['yes']}</b></span> if the screen is saying "{(keys['question']==undefined)?'Dangerous':'Movable'}" within {this.state.success_threshold} seconds, and press nothing if it is saying "{(keys['question']==undefined)?'Not Dangerous':"Won't move"}"!</h5>
                 <div className="taskHeader" style={{ position:'relative',}}>
                     <div style={{height:'350px'}}>
                         <span className="NotiBackground green" style={{visibility:(this.state.right)?'visible':'hidden', opacity: (this.state.buttonTime*1.5<1)?1-1.5*this.state.buttonTime : 0}}></span>
                         <span className="NotiBackground red" style={{visibility:(this.state.wrong)?'visible':'hidden', opacity: (this.state.buttonTime*1.5<1)?1-1.5*this.state.buttonTime : 0}}></span>
                         <span className="NotiBackground grey" style={{visibility:(this.state.late)?'visible':'hidden', opacity: (this.state.buttonTime*1.5<1)?1-1.5*this.state.buttonTime : 0}}></span>
                         
-                        <span className="TrainingText" style={{"display":(this.state.taskStart&&this.state.dangerous)?"block":"none"}}>{(keys['question']==undefined)?'Dangerous':'Movable'}</span>
-                        <span className="TrainingText" style={{"display":(this.state.taskStart&&(!this.state.dangerous))?"block":"none"}}>Not {(keys['question']==undefined)?'Dangerous':'Movable'}</span>
+                        <span className="TrainingText" style={{"display":(this.state.taskStart&&this.state.dangerous)?"block":"none", 
+                        paddingLeft: (this.state.position=='left')?'0px':'200px', paddingRight: (this.state.position=='right')?'0px':'200px'}}>
+                        {(keys['question']==undefined)?'Dangerous':'Movable'}</span>
+                        <span className="TrainingText" style={{"display":(this.state.taskStart&&(!this.state.dangerous))?"block":"none", 
+                        paddingLeft: (this.state.position=='left')?'0px':'200px', paddingRight: (this.state.position=='right')?'0px':'200px'}}>
+                        {(keys['question']==undefined)?'Not Dangerous':"Won't move"}</span>
 
                         <div className="TrainingBlind" style={{display:(this.state.taskStart)?'none':'block'}}>
                             <div className="TaskBlindText">

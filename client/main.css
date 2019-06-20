@@ -41,6 +41,8 @@ body {
   font-size: 8.4rem;
   position: relative;
   top: 20%;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .NotiBackground{
@@ -48,6 +50,7 @@ body {
   height: 100%;
   position: absolute;
   left: 0;
+  
 }
 
 .TaskBlind{
