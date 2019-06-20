@@ -135,14 +135,13 @@ Meteor.methods({
             })
     },
 
-    'worker.nextTask': function(wid, aid, hid){
+    'worker.nextTask': function(wid, aid, hid, tut){
         console.log('ADDITION called')
         Workers.update({wid:wid, aid:aid, hid:hid},
             {
-                $inc: {cur_task: 1}
+                $set: {cur_task: parseInt(tut)+1}
             }            
         )
-        console.log(Workers.find({wid:wid, aid:aid, hid:hid}))
     },
 
     'annotation.annotate': function(wid, aid, hid, videoid, pageduration, prediction, keycode){

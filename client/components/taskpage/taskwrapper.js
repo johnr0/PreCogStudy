@@ -83,7 +83,7 @@ class TaskWrapper extends Component{
         // update the current task number
         window.location.href=redirect_path
         if(!tut.includes('tut')){
-            Meteor.call('worker.nextTask', wid, aid, hid)
+            Meteor.call('worker.nextTask', wid, aid, hid, tut)
         }
         
         
