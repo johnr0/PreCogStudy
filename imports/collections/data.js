@@ -73,11 +73,12 @@ Meteor.methods({
           position.splice(j, 1);
         }
       }
-    }
-
-      Workers.update({_id:w[i]._id}, {$set:{
+      Workers.update({wid:w[i].wid}, {$set:{
         trainingText:text, trainingInput: input, trainingLatency: latency, trainingPosition: position,
       }})
+    }
+
+      
 
 
     }
