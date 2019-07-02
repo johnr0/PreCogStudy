@@ -271,6 +271,12 @@ import Training from "./taskpage/training";
     var question = keycodes[6]
     var trainingready = keycodes[7]
 
+    if (yes=="SHIFT"){
+      yes="LEFT SHIFT"
+    }
+    if (no=="SHIFT"){
+      no="RIGHT SHIFT"
+    }
     if (hand==""){
         hand=undefined
     }  
